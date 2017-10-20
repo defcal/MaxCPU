@@ -32,7 +32,7 @@ namespace WindowsFormsApplication1
             
             foreach (var item in new System.Management.ManagementObjectSearcher("Select * from Win32_Processor").Get())
             {
-                NumberOfCores += int.Parse(item["NumberOfCores"].ToString());
+                NumberOfCores += int.Parse(item["NumberOfLogicalProcessors"].ToString());
             }
             NumberOfProcessors.Text = NumberofProcessors.ToString();
             NumberofCores.Text = NumberOfCores.ToString();
@@ -44,7 +44,7 @@ namespace WindowsFormsApplication1
             Stop.Enabled = true;
             Go.Enabled = false;
             CPULevel.Enabled = false;
-            numberOfThreads = NumberofProcessors * NumberOfCores;
+            numberOfThreads = NumberOfCores; // NumberofProcessors * NumberOfCores;
             cpuLoadThread = new Thread[numberOfThreads];
             LoadLevel = Convert.ToInt16(CPULevel.Value);
             for (int x = 0; x < numberOfThreads; x++)
